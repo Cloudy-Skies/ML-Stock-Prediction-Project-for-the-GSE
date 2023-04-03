@@ -2,18 +2,25 @@ import pandas as pd
 from plotly import graph_objs as go
 import streamlit as st
 from prophet import Prophet
+import requests
+import io
+
 
 @st.cache_data
 def load_data(code):
-    #reading the data
-    df = pd.read_csv("data/{}.csv".format(code))
+    # download data from github repo
+    url = "https://raw.githubusercontent.com/Cloudy-Skies/ML-Stock-Prediction-Project-for-the-GSE/master/Data/"+code+".csv"
+    download = requests.get(url).content
+
+    #read data
+    df = pd.read_csv(io.StringIO(download.decode('utf-8')))
 
     #convert string to date
-    df['Daily Date']=pd.to_datetime(df["Daily Date"],dayfirst=True)
-    df['Daily Date'] = df["Daily Date"].reset_index(drop=True)
+    df["Daily Date"]=pd.to_datetime(df["Daily Date"],dayfirst=True)
+    df["Daily Date"] = df["Daily Date"].reset_index(drop=True)
 
     #sorting the dates from highest to lowest
-    df.sort_values(by='Daily Date')
+    df.sort_values(by="Daily Date")
     return df
 
 #Plot Opening Price

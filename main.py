@@ -21,6 +21,7 @@
 # import streamlit as st
 
 from helper import*
+import os
 
 #Render page with Streamlit
 st.title("Stock Predicition on the GSE")
@@ -32,7 +33,9 @@ n_years = st.slider("Years of prediction:", 1,2, 3)
 period = n_years*365
 
 #Load data
+
 data_load_state = st.text("Loading data...")
+
 df = load_data(selected_stocks)
 data_load_state.text("Loading data...done!")
 
