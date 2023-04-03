@@ -3,5 +3,4 @@ plotly
 streamlit
 prophet
 requests
-io
 pmdarima
