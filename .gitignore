@@ -3,3 +3,6 @@
 
 #ignore all vscode stuff
 .vscode
+
+#ignore kaggle authentication token
+kaggle.json
