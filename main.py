@@ -1,7 +1,6 @@
 ###Experimenting with other approacches
 # import streamlit as st
 # from datetime import date
-# #import phropet from fbprophet
 # from fbprophet import Prophet
 # from fbprophet.plot import plot_plotly
 # from plotly import graph_objs as go
