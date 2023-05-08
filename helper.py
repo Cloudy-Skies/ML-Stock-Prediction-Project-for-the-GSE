@@ -2,6 +2,7 @@ import pandas as pd
 from plotly import graph_objs as go
 import streamlit as st
 from prophet import Prophet
+from prophet.plot import plot_plotly
 import requests
 import io
 
@@ -44,7 +45,10 @@ def plot_data(df, title, xlabel, ylabel):
     #Plotting the figure on Streamlit
     st.plotly_chart(fig)
 
+
+# Prophet Specific Functions
 # Training for prophet
+@st.cache_data
 def train_prophet(df,period):
 
     #
@@ -54,4 +58,7 @@ def train_prophet(df,period):
     m.fit(df)
     future = m.make_future_dataframe(periods=period)
     forecast = m.predict(future)
-    return forecast, future
+    return forecast, future,m
+
+
+## Arima Specific functions

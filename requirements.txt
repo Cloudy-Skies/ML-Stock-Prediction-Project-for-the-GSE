@@ -4,3 +4,4 @@ streamlit
 prophet
 requests
 pmdarima
+u8darts

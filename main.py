@@ -13,7 +13,7 @@
 # stocks = ("AADS","ABL")
 # selected_stocks = st.selectbox("select dataset for prediction", stocks)
 
-# n_years = st.slider("Years of prediction:", 1,2, 3)
+# n_weeks = st.slider("Years of prediction:", 1,2, 3)
 # period = n_years*365
 
 # Import packages and data
@@ -28,8 +28,8 @@ st.title("Stock Predicition on the GSE")
 stocks = ("AADS","ACCESS","AGA","ETI","MTNGH","SCB","TLW","TOTAL")
 selected_stocks = st.selectbox("select dataset for prediction", stocks)
 
-n_years = st.slider("Years of prediction:", 1,2, 3)
-period = n_years*365
+n_months = st.slider("Weeks of prediction:", 1,3,5)
+period = n_months*30
 
 #Load data
 
@@ -47,4 +47,14 @@ plot_opening(df)
 st.subheader('Forecast')
 
 #get forecast
-forecast, future = train_prophet(df,period)
+forecast, future,m = train_prophet(df,period)
+
+st.subheader('Forecast Data')
+st.write(forecast.tail())
+fig1 = plot_plotly(m,forecast)
+st.plotly_chart(fig1)
+
+st.write('Forecast Components')
+fig2=m.plot_components(forecast)
+st.write(fig2)
+
